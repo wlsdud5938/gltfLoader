@@ -11,6 +11,8 @@ git을 clone 받고 clone 받은 디렉토리에 아래의 파일이 존재하�
 - std_image.h           #tiny_gltf.h 빌드에 사용됩니다.
 - json.hpp              #tiny_gltf.h 빌드에 사용됩니다.
 - gltfLoader.cpp        #우리가 사용하고 변경할 코드입니다.
+- testTri.gltf          #테스트를 위한 gltf파일입니다.
+- out.gltf              #make_buffer를 통해 만들어낸 gltf파일입니다.
 
 확인 후 make를 통해 컴파일 합니다.
 <pre><code> $ make </pre></code>
@@ -18,7 +20,7 @@ git을 clone 받고 clone 받은 디렉토리에 아래의 파일이 존재하�
 # gltf 구조 이해하기
 gltf는 크로노스 그룹에서 만든 JSON기반의 3D scene 및 model 파일입니다.
 gltf의 버전은 1.0과 2.0이 존재하지만 우리는 2.0을 사용합니다.
-gltf의 더 자세한 내용은 https://github.com/KhronosGroup/glTF를 참조하세요
+gltf의 더 자세한 내용은 https://github.com/KhronosGroup/glTF 를 참조하세요
 
 ![image1](./image/image.png)
 위의  그림은 gltf파일의 구조도입니다.
@@ -59,3 +61,6 @@ gltfLoader.cpp내의 idx, vtx, color, normal의 정보를 바꾸시고 컴파일
 마지막으로 bufferViews에서 byte데이터들의 offset과 length를 수정해 주면됩니다.
 offset과 length는 실행시 출력의 uri위에 있고 순서는 idx, vtx, normal, color입니다.
 ![image4](./image/image4.png)
+
+# gltf Viewer
+gltf파일은 https://gltf-viewer.donmccurdy.com/ 에서 열어볼수 있습니다.
