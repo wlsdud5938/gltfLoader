@@ -55,12 +55,14 @@ gltfLoader.cpp내의 idx, vtx, color, normal의 정보를 바꾸시고 컴파일
 <pre><code>data:application/octet-stream;base64,AAAAAAAAAA</pre></code>
 같은 데이터를 복사하여 gltf파일에 uri에 붙여넣기합니다.
 
-출력의 예시입니다.
+아래는 출력의 예시입니다.
 ![image5](./image/output.png)
+
+출력된 결과에서 make Uri : 이후의 출력을 모두 복사하여 아래의 uri위치에 붙여넣기 한 후
 
 ![image2](./image/uri.png)
 
-붙여넣기 후 gltfLoader.cpp에서 입력한 idx, vtx, color, normal의 개수를 입력합니다.(기본적으로 vertex의 개수를 입력하시면 됩니다.)
+gltfLoader.cpp에서 입력한 idx, vtx, color, normal의 개수를 입력합니다.(기본적으로 vertex의 개수를 입력하시면 됩니다.)
 
 ![image3](./image/count.png)
 
