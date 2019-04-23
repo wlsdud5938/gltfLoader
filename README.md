@@ -55,21 +55,30 @@ gltfLoader.cpp내의 idx, vtx, color, normal의 정보를 바꾸시고 컴파일
 <pre><code>data:application/octet-stream;base64,AAAAAAAAAA</pre></code>
 같은 데이터를 복사하여 gltf파일에 uri에 붙여넣기합니다.
 
+### 1. uri 붙여넣기
 아래는 출력의 예시입니다.
 ![image5](./image/output.png)
 
-출력된 결과에서 make Uri : 이후의 출력을 모두 복사하여 아래의 uri위치에 붙여넣기 한 후
+출력된 결과에서 make Uri : 이후의 출력을 모두 복사하여 아래의 uri위치에 붙여넣기 한 후 bytelength를 수정합니다. bytelength는 make Uri : 출력 위의 offset+length를 입력하면 됩니다.
 
 ![image2](./image/uri.png)
+
+### 2. vertex 개수 입력하기
 
 gltfLoader.cpp에서 입력한 idx, vtx, color, normal의 개수를 입력합니다.(기본적으로 vertex의 개수를 입력하시면 됩니다.)
 
 ![image3](./image/count.png)
+
+### 3. buffer length 수정하기
 
 마지막으로 bufferViews에서 byte데이터들의 offset과 length를 수정해 주면됩니다.
 offset과 length는 실행시 출력의 uri위에 있고 순서는 idx, vtx, normal, color입니다.
 
 ![image4](./image/length.png)
 
-# gltf Viewer
+# gltf Viewers
 gltf파일은 https://gltf-viewer.donmccurdy.com/ 에서 열어볼수 있습니다.
+
+# 다양한 모델을 찾을 수 있는 곳
+https://github.com/KhronosGroup/glTF-Sample-Models (이곳에서 2.0 데이터) - 꼭 Embedded 파일을 사용하세요(파일뒤에 -Embedded라고 적혀있습니다.)
+
