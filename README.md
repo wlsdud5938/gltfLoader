@@ -23,6 +23,7 @@ gltf의 버전은 1.0과 2.0이 존재하지만 우리는 2.0을 사용합니다
 gltf의 더 자세한 내용은 https://github.com/KhronosGroup/glTF 를 참조하세요
 
 ![image1](./image/image.png)
+
 위의  그림은 gltf파일의 구조도입니다.
 gltf파일을 읽으면 위의 구조도를 참고하여 원하는 component로 접근하면 됩니다.
 
@@ -53,14 +54,20 @@ gltf파일은 uri에 여러 attribute 정보들이 저장되기 때문에 vertex
 gltfLoader.cpp내의 idx, vtx, color, normal의 정보를 바꾸시고 컴파일 후 실행하시면 맨 밑줄에 생성된 
 <pre><code>data:application/octet-stream;base64,AAAAAAAAAA</pre></code>
 같은 데이터를 복사하여 gltf파일에 uri에 붙여넣기합니다.
-![image2](./image/image2.png)
 
-붙여넣기 후 gltfLoader.cpp에서 입력한 idx, vtx, color, normal의 개수를 입력합니다.(inx는 scalar. vtx,normal은 vec3. color는 vec4입니다.)
-![image3](./image/image3.png)
+출력의 예시입니다.
+![image5](./image/output.png)
+
+![image2](./image/uri.png)
+
+붙여넣기 후 gltfLoader.cpp에서 입력한 idx, vtx, color, normal의 개수를 입력합니다.(기본적으로 vertex의 개수를 입력하시면 됩니다.)
+
+![image3](./image/count.png)
 
 마지막으로 bufferViews에서 byte데이터들의 offset과 length를 수정해 주면됩니다.
 offset과 length는 실행시 출력의 uri위에 있고 순서는 idx, vtx, normal, color입니다.
-![image4](./image/image4.png)
+
+![image4](./image/length.png)
 
 # gltf Viewer
 gltf파일은 https://gltf-viewer.donmccurdy.com/ 에서 열어볼수 있습니다.
