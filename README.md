@@ -5,14 +5,10 @@ tinygltf를 활용한 간단한 gltfLoader프로그램 입니다.
 질문사항은 jinyoung@kookmin.ac.kr로 메일 보내주세요
 
 # gltfLoader 시작
-git을 clone 받고 clone 받은 디렉토리에 아래의 파일이 존재하는지 확인합니다.
-- tiny_gltf.h           #gltf load하게 해주는 라이브러리입니다.
-- std_image_write.h     #tiny_gltf.h 빌드에 사용됩니다.
-- std_image.h           #tiny_gltf.h 빌드에 사용됩니다.
-- json.hpp              #tiny_gltf.h 빌드에 사용됩니다.
-- gltfLoader.cpp        #우리가 사용하고 변경할 코드입니다.
-- testTri.gltf          #테스트를 위한 gltf파일입니다.
-- out.gltf              #make_buffer를 통해 만들어낸 gltf파일입니다.
+git을 clone 받고 clone 받은 디렉토리에 아래의 디렉토리들을 확인하고 각각을 컴파일합니다.
+- loader
+- saver
+- viewer
 
 확인 후 make를 통해 컴파일 합니다.
 <pre><code> $ make </pre></code>
@@ -28,57 +24,30 @@ gltf의 더 자세한 내용은 https://github.com/KhronosGroup/glTF 를 참조�
 gltf파일을 읽으면 위의 구조도를 참고하여 원하는 component로 접근하면 됩니다.
 
 # gltfLoader 이해하기
-gltfLoader에는 4가지의 함수가 존재합니다.
-- loadModel
-- dbgModel
-- print_buffer
-- make_buffers
+gltfLoader에는 3가지 프로그램이 존재합니다.
+- loader
+- saver
+- viewer
 
-## loadModel
-gltf파일은 로드합니다. 로드의 성공 여부를 출력해 줍니다.
+## Loader
+gltf 파일을 읽고 bytedata를 float형태로 바꾸어 출력해 줍니다.
+gltf 파일 내의 정보들을 얻을 수 있습니다.
 
-## dbgModel
-gltf파일의 로드에 성공하였다면 gltf파일이 갖는 여러 속성들을 보여줍니다.
-- 여러 Node들의 정보(카메라, lamp 등)
-- Mesh의 정보
-- mesh.primitives(idx).attributes(idx)를 통해 attributes
-- attributes를 통해 POSITION, NORMAL, COLOR_0 등의 bufferview정보
-- gltf파일의 정보들이 encoding된 uri정보
+![image1](./image/loader.png)
 
-## print_buffer
-gltf의 각 attribute마다 encoding된 byte데이터로 읽어 오기 때문에 이를 사람이 볼수 있는 float형으로 보여줍니다.
+## Saver
+gltf 파일을 읽고 사용자가 지정한 데이터를 입력하면 입력한 데이터에 맞는 gltf모델을 생성하여 저장합니다.
+사용자가 지정해야할 데이터는 vertexCount, index, vertexPosition, normal, color 등 입니다.
 
-## make_buffers
-gltf파일은 uri에 여러 attribute 정보들이 저장되기 때문에 vertex position이나 color등을 float형의 숫자로 그냥 넣어 줄수 없습니다.
-이를 byte데이터로 변환하여 저장하기 위한 함수입니다.
-gltfLoader.cpp내의 idx, vtx, color, normal의 정보를 바꾸시고 컴파일 후 실행하시면 맨 밑줄에 생성된 
-<pre><code>data:application/octet-stream;base64,AAAAAAAAAA</pre></code>
-같은 데이터를 복사하여 gltf파일에 uri에 붙여넣기합니다.
+![image1](./image/saver.png)
 
-### 1. uri 붙여넣기
-아래는 출력의 예시입니다.
-![image5](./image/output.png)
+saver를 통해 생성한 모델입니다.
 
-출력된 결과에서 make Uri : 이후의 출력을 모두 복사하여 아래의 uri위치에 붙여넣기 한 후 bytelength를 수정합니다. bytelength는 make Uri : 출력 위의 offset+length를 입력하면 됩니다.
+![image1](./image/makeImg.png)
 
-![image2](./image/uri.png)
+## Viewer
+gltf파일을 읽고 보여주는 프로그램입니다.
+<pre><code> $ ./basic_viewer /gltf파일경로 </pre></code>
+를 실행시키면 해당 gltf모델이 보여집니다.
 
-### 2. vertex 개수 입력하기
-
-gltfLoader.cpp에서 입력한 idx, vtx, color, normal의 개수를 입력합니다.(기본적으로 vertex의 개수를 입력하시면 됩니다.)
-
-![image3](./image/count.png)
-
-### 3. buffer length 수정하기
-
-마지막으로 bufferViews에서 byte데이터들의 offset과 length를 수정해 주면됩니다.
-offset과 length는 실행시 출력의 uri위에 있고 순서는 idx, vtx, normal, color입니다.
-
-![image4](./image/length.png)
-
-# gltf Viewers
-gltf파일은 https://gltf-viewer.donmccurdy.com/ 에서 열어볼수 있습니다.
-
-# 다양한 모델을 찾을 수 있는 곳
-https://github.com/KhronosGroup/glTF-Sample-Models (이곳에서 2.0 데이터) - 꼭 Embedded 파일을 사용하세요(파일뒤에 -Embedded라고 적혀있습니다.)
-
+![image1](./image/viewer.png)
