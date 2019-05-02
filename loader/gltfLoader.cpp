@@ -15,7 +15,7 @@
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
-//gltf ÆÄÀÏÀÌ ¼º°øÀûÀ¸·Î ·Îµù µÇ¾ú´ÂÁö È®ÀÎÇÕ´Ï´Ù.
+//gltf ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 bool loadModel(tinygltf::Model &model, const std::string filename) {
 	tinygltf::TinyGLTF loader;
 	std::string err;
@@ -38,7 +38,7 @@ bool loadModel(tinygltf::Model &model, const std::string filename) {
 	return res;
 }
 
-//gltfÆÄÀÏ¿¡ ÀúÀåµÈ bytebuffer¸¦ ½ÇÁ¦ µ¥ÀÌÅÍ·Î º¯È¯ÇÏ¿© Ãâ·ÂÇØÁÝ´Ï´Ù.
+//gltfï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ bytebufferï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ ï¿½ï¿½È¯ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´Ï´ï¿½.
 void print_buffer(const std::vector<unsigned char>& buffer,
 	int offset, int length,
 	int componentType, const std::string attribName) {
@@ -142,11 +142,6 @@ void dbgModel(tinygltf::Model &model) {
 			std::cout << "indexaccessor: count " << indexAccessor.count << ", type "
 				<< indexAccessor.componentType << std::endl;
 
-			//tinygltf::Material &mat = model.materials[primitive.material];
-			/*for (auto &mats : model.materials[primitive.material].values) {
-			  std::cout << "mat : " << mats.first.c_str() << std::endl;
-			}*/
-
 			for (auto &image : model.images) {
 				std::cout << "image name : " << image.uri << std::endl;
 				std::cout << "  size : " << image.image.size() << std::endl;
@@ -163,7 +158,7 @@ void dbgModel(tinygltf::Model &model) {
 				std::cout << "attributeValue : " << attrib.second << std::endl;
 				tinygltf::Accessor accessor = model.accessors[attrib.second];
 
-				std::cout << "color componentType : " << accessor.componentType
+				std::cout << "componentType : " << accessor.componentType
 					<< std::endl;
 				std::cout << "bufferoffset : " << accessor.byteOffset << std::endl;
 				std::cout << "buffer : "
@@ -182,8 +177,8 @@ void dbgModel(tinygltf::Model &model) {
 					<< "buffers : "
 					<< model.buffers[model.bufferViews[accessor.bufferView].buffer]
 					.uri.substr(
-						model.bufferViews[accessor.bufferView].byteOffset,
-						model.bufferViews[accessor.bufferView].byteLength)
+						model.bufferViews[accessor.bufferView].byteOffset+37,
+						model.bufferViews[accessor.bufferView].byteLength+37)
 					<< std::endl;
 				print_buffer(
 					model.buffers[model.bufferViews[accessor.bufferView].buffer].data,

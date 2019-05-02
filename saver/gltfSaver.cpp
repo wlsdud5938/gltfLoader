@@ -54,9 +54,9 @@ void make_buffers(json &inputGltf)
 
 	unsigned short idx[] = { 0,1,2 };
 	float vtx[] = {
-		-1.0f, 0.0f,  1.0f,
-		 1.0f, 0.0f, -1.0f,
-		-1.0f, 0.0f, -1.0f
+	   0.5f,  0.5f,  0.0f,          // 0th vertex position
+	  -0.5f, -0.5f,  0.0f,          // 1st vertex position
+	   0.5f, -0.5f,  0.0f,
 	};
 
 	float normal[] = {
