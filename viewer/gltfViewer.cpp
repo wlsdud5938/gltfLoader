@@ -249,12 +249,12 @@ std::map<int, GLuint> bindMesh(std::map<int, GLuint> vbos,
 }
 // bind models
 GLuint bindModel(tinygltf::Model &model) {
-  std::map<int, GLuint> vbos;
+  
   GLuint vao;
   glGenVertexArrays(1, &vao);
   glBindVertexArray(vao);
+  std::map<int, GLuint> vbos;
   const tinygltf::Scene &scene = model.scenes[model.defaultScene];
-//   bindModelNodes(vbos, model, model.nodes[scene.nodes[0]]);
   bindMesh(vbos, model, model.meshes[model.nodes[scene.nodes[0]].mesh]);
   glBindVertexArray(0);
   // cleanup vbos
@@ -281,7 +281,6 @@ void drawModel(GLuint vao, tinygltf::Model &model) {
   glBindVertexArray(vao);
 
   const tinygltf::Scene &scene = model.scenes[model.defaultScene];
-//   drawModelNodes(model, model.nodes[scene.nodes[0]]);
   drawMesh(model, model.meshes[model.nodes[scene.nodes[0]].mesh]);
   glBindVertexArray(0);
 }
@@ -314,14 +313,16 @@ int main(int argc, char **argv)
   GLFWwindow* window;
 
   // Initialize GLFW library
-  if (!glfwInit())
+  if (!glfwInit()){
+    std::cout << "Failed glfwInit!" << std::endl;
     return -1;
-
-
+  }
+  
   // Create a GLFW window containing a OpenGL context
   window = glfwCreateWindow(500, 500, "Hello Gltf", NULL, NULL);
   if (!window)
   {
+    std::cout << "No window!" << std::endl;
     glfwTerminate();
     return -1;
   }
@@ -341,8 +342,7 @@ int main(int argc, char **argv)
   /// TODO: Set a callback for resizing the framebuffer 
   glfwSetFramebufferSizeCallback(window, frambuffer_size_callback);
 
-  std::string filename =
-		"out.gltf";
+  std::string filename = "out.gltf";
   if (argc > 1) {
 		filename = argv[1];
 	}
@@ -351,6 +351,7 @@ int main(int argc, char **argv)
 
   GLuint vao = bindModel(model);
   
+  std::cout << "start loop" << std::endl; 
   // Loop until the user closes the window
   while (!glfwWindowShouldClose(window))
   {
